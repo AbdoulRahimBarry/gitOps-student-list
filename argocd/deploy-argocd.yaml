@@ -16,6 +16,7 @@ metadata:
   name: app
 
 ---
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -32,7 +33,6 @@ spec:
         app: app-v1
     spec:
       containers:
-
       - name: pozos-api
         image: eu.gcr.io/traefikproject/student-list:latest
         imagePullPolicy: Always
@@ -40,17 +40,39 @@ spec:
         - name: pozos-api
           containerPort: 5000
         volumeMounts:
-        - mountPath: "/data/student_age.json"
+        - mountPath: /data/student_age.json
           name: studentjson
-
+          
+      initContainers:
+      - name: pozos-website
+        image: php:apache
+        ports:
+        - name: pozos-website
+          containerPort: 80
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: pozos-website
+        env:
+        - name: USERNAME
+          value: "toto"
+        - name: PASSWORD
+          value: "python"
+      
       volumes:
-
       - name: studentjson
         hostPath:
           # directory location on host
-          path: "/home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json"
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
           # this field is optional
-          type: FileOrCreate
+          #type: Directory
+
+      - name: pozos-website
+        hostPath:
+          # directory location on host
+          path: /home/barry2abdulrahim/gitOps-student-list/website
+          # this field is optional
+          #type: Directory
+         
       imagePullSecrets:
       - name: resistry-gcr
 
