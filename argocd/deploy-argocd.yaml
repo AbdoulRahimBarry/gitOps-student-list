@@ -43,7 +43,7 @@ spec:
       - name: studentjson
         hostPath:
           # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/student_age.json
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
           # this field is optional
           type: FileOrCreate
           
