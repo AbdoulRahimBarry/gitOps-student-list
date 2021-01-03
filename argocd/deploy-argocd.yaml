@@ -54,7 +54,7 @@ spec:
         - name: USERNAME
           value: "toto"
         - name: PASSWORD
-        value: "python"
+          value: "python"
       
       volumes:
       - name: studentjson
