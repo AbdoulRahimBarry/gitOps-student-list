@@ -64,7 +64,7 @@ spec:
           # this field is optional
           #type: Directory
 
-      - name: studentjson
+      - name: pozos-website
         hostPath:
           # directory location on host
           path: /home/barry2abdulrahim/gitOps-student-list/website
