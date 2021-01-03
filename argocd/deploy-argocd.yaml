@@ -41,7 +41,7 @@ spec:
         volumeMounts:
         - mountPath: /data/student_age.json
           name: studentjson
-      
+      initContainers:
       - name: pozos-website
         image: php:apache
         ports:
