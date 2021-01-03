@@ -42,10 +42,10 @@ spec:
       - name: student-json
         hostPath:
           # directory location on host
-          path: /simple_api/student_age.json
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
           # /home/barry2abdulrahim/gitOps-student-list/simple_api
           # this field is optional
-          type: FileOrCreate  
+          type: File
       imagePullSecrets:
       - name: resistry-gcr
       
