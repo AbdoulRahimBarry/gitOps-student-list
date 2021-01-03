@@ -42,7 +42,7 @@ spec:
       - name: student-json
         hostPath:
           # directory location on host
-          path: /simple_api/student_age.json
+          path: simple_api/student_age.json
           # this field is optional
           type: Directory  
       imagePullSecrets:
