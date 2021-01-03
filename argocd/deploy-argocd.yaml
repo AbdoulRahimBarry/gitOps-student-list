@@ -22,7 +22,7 @@ metadata:
   name: app-v1
   namespace: app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: app-v1
