@@ -37,9 +37,9 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /data
-          name: student_json
+          name: student-json
       volumes:
-      - name: student_json
+      - name: student-json
         hostPath:
           # directory location on host
           path: /simple_api/student_age.json
