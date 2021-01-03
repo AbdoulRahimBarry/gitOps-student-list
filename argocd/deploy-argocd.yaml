@@ -36,13 +36,14 @@ spec:
         image: eu.gcr.io/traefikproject/student-list:latest
         imagePullPolicy: Always
         volumeMounts:
-        - mountPath: /data
+        - mountPath: /data #student_age.json
           name: student-json
       volumes:
       - name: student-json
         hostPath:
           # directory location on host
-          path: simple_api/student_age.json
+          path: gitOps-student-list/simple_api/student_age.json
+          # /home/barry2abdulrahim/gitOps-student-list/simple_api
           # this field is optional
           type: Directory  
       imagePullSecrets:
