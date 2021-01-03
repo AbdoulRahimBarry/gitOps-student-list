@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: app-v1
-        image: eu.gcr.io/traefikproject/hello-world:latest
+        image: eu.gcr.io/traefikproject/student-list:latest
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /data
