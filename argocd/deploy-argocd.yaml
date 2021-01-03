@@ -37,7 +37,7 @@ spec:
         imagePullPolicy: Always
         
         volumeMounts:
-        - mountPath: /home/barry2abdulrahim/gitOps-student-list/student_age.json #/data/student_age.json
+        - mountPath: /data/student_age.json
           name: studentjson
       volumes:
       - name: studentjson
