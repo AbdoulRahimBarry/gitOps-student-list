@@ -45,7 +45,7 @@ spec:
           path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
           # /home/barry2abdulrahim/gitOps-student-list/simple_api
           # this field is optional
-          #type: File
+          type: Directory
       imagePullSecrets:
       - name: resistry-gcr
       
