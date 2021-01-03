@@ -43,7 +43,7 @@ spec:
         - mountPath: /data #/student_age.json
           name: studentjson
           
-      initContainers:
+      #initContainers:
       - name: pozos-website
         image: php:apache
         ports:
