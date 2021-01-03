@@ -1,0 +1,84 @@
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: ewogICJjcmVkSGVscGVycyI6IHsKICAgICJnY3IuaW8iOiAiZ2Nsb3VkIiwKICAgICJ1cy5nY3IuaW8iOiAiZ2Nsb3VkIiwKICAgICJldS5nY3IuaW8iOiAiZ2Nsb3VkIiwKICAgICJhc2lhLmdjci5pbyI6ICJnY2xvdWQiLAogICAgInN0YWdpbmctazhzLmdjci5pbyI6ICJnY2xvdWQiLAogICAgIm1hcmtldHBsYWNlLmdjci5pbyI6ICJnY2xvdWQiCiAgfQp9
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: resistry-gcr
+  namespace: app
+type: kubernetes.io/dockerconfigjson
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-v1
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-v1
+  template:
+    metadata:
+      labels:
+        app: app-v1
+    spec:
+      containers:
+      - name: app-v1
+        image: eu.gcr.io/traefikproject/hello-world:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /data
+          name: student_json
+      volumes:
+      - name: student_json
+        hostPath:
+          # directory location on host
+          path: ../simple_api/student_age.json
+          # this field is optional
+          type: Directory  
+      imagePullSecrets:
+      - name: resistry-gcr
+      
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-v1
+  namespace: app
+  labels:
+    app: app-v1
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    name: app-v1
+  selector:
+    app: app-v1
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-tls
+  namespace: app
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`studentlist.demo.telemaque.fr`)
+      services:
+        - name: app-v1
+          port: 80
+  tls:
+    certResolver: myresolver
