@@ -50,7 +50,7 @@ spec:
           # directory location on host
           path: "/home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json"
           # this field is optional
-          #type: Directory
+          type: FileOrCreate
       imagePullSecrets:
       - name: resistry-gcr
 
