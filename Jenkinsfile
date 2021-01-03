@@ -4,7 +4,7 @@ pipeline {
         /* Variable */
         DOCKER_TAG = getDockerTag()
         PROJECT_ID = 'traefikproject'
-        IMAGE_NAME = 'node-app'
+        IMAGE_NAME = 'studentList'
     }
     
     stages{
@@ -13,11 +13,10 @@ pipeline {
                  script {
                     /* Build the image to the google container Registry form */
                     docker.withRegistry('https://eu.gcr.io','gcr:service_account_json_key') {
-                        def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f Dockerfile .")
+                        def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f simple_api/Dockerfile .")
                          
                         /* Push the image to the google container Registry */
                         stage 'push image'
-                        containerResistry.push()
                         containerResistry.push('latest')
 
                      }
