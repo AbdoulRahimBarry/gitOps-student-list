@@ -33,17 +33,6 @@ spec:
         app: app-v1
     spec:
       containers:
-      - name: pozos-api
-        image: eu.gcr.io/traefikproject/student-list:latest
-        imagePullPolicy: Always
-        ports:
-        - name: pozos-api
-          containerPort: 5000
-        volumeMounts:
-        - mountPath: /data #/student_age.json
-          name: studentjson
-          
-      #initContainers:
       - name: pozos-website
         image: php:apache
         ports:
@@ -57,6 +46,17 @@ spec:
           value: "toto"
         - name: PASSWORD
           value: "python"
+      
+      initContainers:      
+      - name: pozos-api
+        image: eu.gcr.io/traefikproject/student-list:latest
+        imagePullPolicy: Always
+        ports:
+        - name: pozos-api
+          containerPort: 5000
+        volumeMounts:
+        - mountPath: /data #/student_age.json
+          name: studentjson      
       
       volumes:
       - name: studentjson
