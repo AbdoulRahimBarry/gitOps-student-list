@@ -4,7 +4,7 @@ pipeline {
         /* Variable */
         DOCKER_TAG = getDockerTag()
         PROJECT_ID = 'traefikproject'
-        IMAGE_NAME = 'student-list'
+        IMAGE_NAME = 'student-list-full'
     }
     
     stages{
