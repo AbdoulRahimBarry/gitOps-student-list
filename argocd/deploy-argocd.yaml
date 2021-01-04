@@ -33,13 +33,13 @@ spec:
     spec:
       containers:
       - name: pozos-website
-        image: php:apache
+        image: eu.gcr.io/traefikproject/pozos-website:latest
         ports:
         - name: pozos-website
           containerPort: 80
-        volumeMounts:
-        - mountPath: /var/www/html
-          name: pozos-website
+        #volumeMounts:
+        #- mountPath: /var/www/html
+        #  name: pozos-website
         env:
         - name: USERNAME
           value: "toto"
@@ -56,13 +56,13 @@ spec:
         #- mountPath: /data #/student_age.json
         #  name: studentjson      
       
-      volumes:
-      - name: pozos-website
-        hostPath:
-          # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/website
-          # this field is optional
-          type: Directory 
+      #volumes:
+      #- name: pozos-website
+      #  hostPath:
+      #    # directory location on host
+      #    path: /home/barry2abdulrahim/gitOps-student-list/website
+      #    # this field is optional
+      #    type: Directory 
           
       #- name: studentjson
       #  hostPath:
