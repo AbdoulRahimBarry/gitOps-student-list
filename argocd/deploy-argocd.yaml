@@ -100,7 +100,7 @@ spec:
     - kind: Rule
       match: Host(`studentlist.demo.telemaque.fr`)
       services:
-        - name: app-v1
+        - name: app-v12
           port: 80
   tls:
     certResolver: myresolver
