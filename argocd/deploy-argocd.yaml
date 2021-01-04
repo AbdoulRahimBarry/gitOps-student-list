@@ -43,7 +43,7 @@ spec:
         - mountPath: /data #/student_age.json
           name: studentjson
           
-      #initContainers:
+      initContainers:
       - name: pozos-website
         image: php:apache
         ports:
@@ -62,9 +62,9 @@ spec:
       - name: studentjson
         hostPath:
           # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/simple_api #/student_age.json
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
           # this field is optional
-          type: Directory
+          type: File
 
       - name: pozos-website
         hostPath:
