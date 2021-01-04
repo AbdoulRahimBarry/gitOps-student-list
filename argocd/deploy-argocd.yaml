@@ -80,7 +80,7 @@ metadata:
   labels:
     app: app-v1
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 80
     name: app-v1
@@ -100,7 +100,7 @@ spec:
     - kind: Rule
       match: Host(`studentlist.demo.telemaque.fr`)
       services:
-        - name: app-v12
+        - name: app-v1
           port: 80
   tls:
     certResolver: myresolver
