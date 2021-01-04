@@ -59,17 +59,17 @@ spec:
           name: studentjson      
       
       volumes:
-      - name: studentjson
-        hostPath:
-          # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/simple_api #/student_age.json
-          # this field is optional
-          type: Directory
-
       - name: pozos-website
         hostPath:
           # directory location on host
           path: /home/barry2abdulrahim/gitOps-student-list/website
+          # this field is optional
+          type: Directory 
+      
+      - name: studentjson
+        hostPath:
+          # directory location on host
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api #/student_age.json
           # this field is optional
           type: Directory
          
