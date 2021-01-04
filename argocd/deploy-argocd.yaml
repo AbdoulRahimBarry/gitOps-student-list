@@ -46,16 +46,15 @@ spec:
         - name: PASSWORD
           value: "python"
       
-      initContainers:      
       - name: pozos-api
-        image: eu.gcr.io/traefikproject/student-list:latest
+        image: eu.gcr.io/traefikproject/pozos-api:latest
         imagePullPolicy: Always
         ports:
         - name: pozos-api
           containerPort: 5000
-        volumeMounts:
-        - mountPath: /data #/student_age.json
-          name: studentjson      
+        #volumeMounts:
+        #- mountPath: /data #/student_age.json
+        #  name: studentjson      
       
       volumes:
       - name: pozos-website
@@ -65,12 +64,12 @@ spec:
           # this field is optional
           type: Directory 
           
-      - name: studentjson
-        hostPath:
-          # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/simple_api
-          # this field is optional
-          type: Directory
+      #- name: studentjson
+      #  hostPath:
+      #    # directory location on host
+      #    path: /home/barry2abdulrahim/gitOps-student-list/simple_api
+      #    # this field is optional
+      #    type: Directory
          
       imagePullSecrets:
       - name: resistry-gcr
