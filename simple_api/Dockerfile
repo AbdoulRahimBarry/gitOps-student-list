@@ -5,9 +5,13 @@ LABEL maintainer="175777@supinfo.com"
 RUN apt-get update -y && apt-get install python-dev python3-dev libsasl2-dev python-dev libldap2-dev libssl-dev -y
 RUN pip install flask flask_httpauth flask_simpleldap python-dotenv
 #COPY SOURCE CODE IN THE IMAGE
-COPY simple_api/student_age.py /
+RUN -p mkdir /data
+COPY simple_api/student_age.py /data
+
+RUN mkdir -p /var/www/html
+COPY website /var/www/html
 #CREATE DATA FOLDER
-VOLUME [ "/data" ]
+#VOLUME [ "/data" ]
 #EXPOSE PORT
 EXPOSE 5000
 #RUN CODE
