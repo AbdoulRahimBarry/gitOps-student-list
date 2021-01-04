@@ -75,7 +75,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pozos-api #app-v1
+  name: app-v1
   namespace: app
   labels:
     app: app-v1
