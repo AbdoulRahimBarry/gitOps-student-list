@@ -16,7 +16,6 @@ metadata:
   name: app
 
 ---
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -62,7 +61,7 @@ spec:
       - name: pozos-website
         hostPath:
           # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/website/index.php
+          path: /home/barry2abdulrahim/gitOps-student-list/website
           # this field is optional
           #type: Directory 
           type: File 
@@ -70,7 +69,7 @@ spec:
       - name: studentjson
         hostPath:
           # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/simple_api/student_age.json
+          path: /home/barry2abdulrahim/gitOps-student-list/simple_api
           # this field is optional
           #type: Directory
           type: File 
