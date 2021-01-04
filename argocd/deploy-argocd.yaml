@@ -8,3 +8,99 @@ metadata:
   name: resistry-gcr
   namespace: app
 type: kubernetes.io/dockerconfigjson
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pozos-api
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-v1
+  template:
+    metadata:
+      labels:
+        app: app-v1
+    spec:
+      containers:
+      - name: pozos-api
+        image: eu.gcr.io/traefikproject/pozos-api:latest
+        imagePullPolicy: Always
+        ports:
+        - name: pozos-api
+          containerPort: 5000
+      imagePullSecrets:
+      - name: resistry-gcr
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pozos-website
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-v1
+  template:
+    metadata:
+      labels:
+        app: app-v1
+    spec:
+      containers:
+      - name: pozos-website
+        image: eu.gcr.io/traefikproject/pozos-website:latest
+        ports:
+        - name: pozos-website
+          containerPort: 80
+        env:
+        - name: USERNAME
+          value: "toto"
+        - name: PASSWORD
+          value: "python"
+      imagePullSecrets:
+      - name: resistry-gcr
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-v1
+  namespace: app
+  labels:
+    app: app-v1
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    name: app-v1
+  selector:
+    app: app-v1
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-tls
+  namespace: app
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`studentlist.demo.telemaque.fr`)
+      services:
+        - name: app-v1
+          port: 80
+  tls:
+    certResolver: myresolver
