@@ -62,9 +62,9 @@ spec:
       - name: pozos-website
         hostPath:
           # directory location on host
-          path: /home/barry2abdulrahim/gitOps-student-list/website
+          path: /home/barry2abdulrahim/gitOps-student-list/website/index.php
           # this field is optional
-          type: Directory 
+          type: File 
       
       - name: studentjson
         hostPath:
