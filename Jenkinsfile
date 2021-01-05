@@ -33,7 +33,12 @@ pipeline {
         }
 
 
-
+        stage('Git Checkout') {
+             steps {
+                 sh "pwd"
+    
+          }
+        }
 
 
     }
