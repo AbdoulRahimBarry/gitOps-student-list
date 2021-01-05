@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Push Docker Image'){
              steps {
-               withCredentials([string(credentialsId: 'jenkin-argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
+               withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
                  docker tag $HOSTNAME/$PROJECT_ID/$IMAGE_NAME $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG
 
