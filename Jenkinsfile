@@ -5,7 +5,7 @@ pipeline {
         DOCKER_TAG = getDockerTag()
         PROJECT_ID = 'traefikproject'
         IMAGE_NAME = 'pozos-website' //CONTAINER
-        HOSTNAME = 'https://eu.gcr.io'
+        HOSTNAME = 'eu.gcr.io'
 
         ARGOCD_SERVER='35.188.203.1'
 
@@ -19,8 +19,8 @@ pipeline {
                     docker.withRegistry('https://eu.gcr.io','gcr:service_account_json_key') {
                         def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f simple_api/Dockerfile .")
                         
-                        docker tag ${HOSTNAME}/${PROJECT_ID}/${IMAGE_NAME} ${HOSTNAME}/${PROJECT_ID}/${IMAGE_NAME}:${DOCKER_TAG}
-                        docker push ${HOSTNAME}/${PROJECT_ID}/${IMAGE_NAME:${DOCKER_TAG}
+                        docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
+                        docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME:${env.DOCKER_TAG}
                          
                         /* Push the image to the google container Registry */
                         //stage 'push image'
@@ -34,6 +34,7 @@ pipeline {
              steps {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
+                 docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
                  """
                }
              }
