@@ -5,7 +5,7 @@ pipeline {
         DOCKER_TAG = getDockerTag()
         PROJECT_ID = 'traefikproject'
         IMAGE_NAME = 'pozos-website' //CONTAINER
-        HOSTNAME = 'eu.gcr.io'
+        HOSTNAME = 'https://eu.gcr.io'
 
         ARGOCD_SERVER='35.188.203.1'
 
@@ -34,7 +34,6 @@ pipeline {
              steps {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
-                 docker tag ${HOSTNAME}/${PROJECT_ID}/${IMAGE_NAME} ${HOSTNAME}/${PROJECT_ID}/${IMAGE_NAME}:${DOCKER_TAG}
                  """
                }
              }
