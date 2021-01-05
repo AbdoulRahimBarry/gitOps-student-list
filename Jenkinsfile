@@ -4,7 +4,7 @@ pipeline {
         /* Variable */
         DOCKER_TAG = getDockerTag()    # Tag
         PROJECT_ID = 'traefikproject'  # Name Project GCP
-        IMAGE_NAME = 'pozos-website'   # Name Image
+        IMAGE_NAME = 'pozos-website'   # Name Image to GCR
     }
     
     stages{
