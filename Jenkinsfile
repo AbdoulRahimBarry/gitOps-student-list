@@ -31,17 +31,23 @@ pipeline {
                  }
              }
         }
-        stage('Deploy Docker Image with Argocd'){
-             steps {
-               withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
-                 sh """
-                 
-                 ARGOCD_SERVER=$ARGOCD_SERVER argocd --grpc-web app set $APP_NAME --kustomize-image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
-                 
-                 """
-               }
-             }
+
+
+        stage('Deploy E2E') {
+          environment {
+            GIT_CREDS = credentials('git')
+          }
+          steps {
+            container('tools') {
+              sh "git clone https://github.com/AbdoulRahimBarry/gitOps-student-list.git"
+              sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
+    
+
+            }
+          }
         }
+
+
     }
 }
 
