@@ -35,7 +35,7 @@ pipeline {
 
         stage('Git Checkout') {
              steps {
-                 sh "git credentialsId: 'github_login_password', url: 'https://github.com/AbdoulRahimBarry/gitOps-student-list.git'"
+                 git credentialsId: 'github_login_password', url: 'https://github.com/AbdoulRahimBarry/gitOps-student-list.git'
     
           }
         }
