@@ -31,7 +31,7 @@ pipeline {
              steps {
                withCredentials([string(credentialsId: 'jenkin-argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
-                 docker tag $HOSTNAME/$PROJECT_ID/$IMAGE_NAME $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG  /*eu.gcr.io/traefikproject/pozos-website*/
+                 docker tag $HOSTNAME/$PROJECT_ID/$IMAGE_NAME $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG
 
                  """
                }
