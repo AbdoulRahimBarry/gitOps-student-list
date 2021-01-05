@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy E2E') {
              steps {
                  script {
-                     sh "git clone https://github.com/AbdoulRahimBarry/gitOps-student-list.git"
+                     sh "git clone https://github.com/alexmt/argocd-demo-deploy.git"
                      sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
     
 
