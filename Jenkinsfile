@@ -27,7 +27,7 @@ pipeline {
                  }
              }
         }
-        stage('Build Docker Image'){
+        stage('Push Docker Image'){
              steps {
                withCredentials([string(credentialsId: 'jenkin-argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
