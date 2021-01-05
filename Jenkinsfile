@@ -36,7 +36,9 @@ pipeline {
         stage('Git Checkout') {
              steps {
                  sh "pwd"
-    
+                 dir("argocd-demo-deploy") {
+                   sh "cd ./argocd && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
+                 }    
           }
         }
 
