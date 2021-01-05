@@ -19,8 +19,8 @@ pipeline {
                     docker.withRegistry('https://eu.gcr.io','gcr:service_account_json_key') {
                         def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f simple_api/Dockerfile .")
                         
-                        docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
-                        docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME:${env.DOCKER_TAG}
+                        sh "docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
+                        sh "docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME:${env.DOCKER_TAG}"
                          
                         /* Push the image to the google container Registry */
                         //stage 'push image'
@@ -34,7 +34,6 @@ pipeline {
              steps {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
-                 docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
                  """
                }
              }
