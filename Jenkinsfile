@@ -30,11 +30,11 @@ pipeline {
                  }
              }
         }
-        stage('Push Docker Image'){
+        stage('Deploy Docker Image with Argocd'){
              steps {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
-                 docker image inspect ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}
+                 docker image inspect ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG} -f '{{join .RepoDigests ","}}')
                  """
                }
              }
