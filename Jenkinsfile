@@ -34,13 +34,10 @@ pipeline {
 
 
         stage('Deploy E2E') {
-          environment {
-            GIT_CREDS = credentials('git')
-          }
-          steps {
-            container('tools') {
-              sh "git clone https://github.com/AbdoulRahimBarry/gitOps-student-list.git"
-              sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
+             steps {
+                 script {
+                     sh "git clone https://github.com/AbdoulRahimBarry/gitOps-student-list.git"
+                     sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
     
 
             }
