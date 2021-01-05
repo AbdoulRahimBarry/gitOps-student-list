@@ -33,14 +33,10 @@ pipeline {
         }
 
 
-        stage('Deploy E2E') {
+        stage('Git Checkout') {
              steps {
-                 script {
-                     sh "git clone https://github.com/alexmt/argocd-demo-deploy.git"
-                     sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
+                 sh "git credentialsId: 'github_login_password', url: 'https://github.com/AbdoulRahimBarry/gitOps-student-list.git'"
     
-
-            }
           }
         }
 
