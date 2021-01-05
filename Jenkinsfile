@@ -2,9 +2,13 @@ pipeline {
     agent any
     environment{
         /* Variable */
-        DOCKER_TAG = getDockerTag()    // Tag
-        PROJECT_ID = 'traefikproject'  // Name Project GCP
-        IMAGE_NAME = 'pozos-website'   // Name Image to GCR
+        DOCKER_TAG = getDockerTag()
+        PROJECT_ID = 'traefikproject'
+        IMAGE_NAME = 'pozos-website' //CONTAINER
+        HOSTNAME = 'eu.gcr.io'
+
+        ARGOCD_SERVER='35.188.203.1'
+
     }
     
     stages{
@@ -16,11 +20,21 @@ pipeline {
                         def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f simple_api/Dockerfile .")
                          
                         /* Push the image to the google container Registry */
-                        stage 'push image'
-                        containerResistry.push('latest')
+                        //stage 'push image'
+                        //containerResistry.push('latest')
 
                      }
                  }
+             }
+        }
+        stage('Build Docker Image'){
+             steps {
+               withCredentials([string(credentialsId: 'jenkin-argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
+                 sh """
+                 docker tag $HOSTNAME/$PROJECT_ID/$IMAGE_NAME $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG  /*eu.gcr.io/traefikproject/pozos-website*/
+
+                 """
+               }
              }
         }
     }
