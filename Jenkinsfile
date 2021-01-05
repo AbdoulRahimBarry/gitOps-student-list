@@ -2,9 +2,9 @@ pipeline {
     agent any
     environment{
         /* Variable */
-        DOCKER_TAG = getDockerTag()    # Tag
-        PROJECT_ID = 'traefikproject'  # Name Project GCP
-        IMAGE_NAME = 'pozos-website'   # Name Image to GCR
+        DOCKER_TAG = getDockerTag()    // Tag
+        PROJECT_ID = 'traefikproject'  // Name Project GCP
+        IMAGE_NAME = 'pozos-website'   // Name Image to GCR
     }
     
     stages{
