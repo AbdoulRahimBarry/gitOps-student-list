@@ -33,9 +33,9 @@ pipeline {
         stage('Push Docker Image'){
              steps {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
-                 sh """
-                 IMAGE_DIGEST=$(docker image inspect ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG} -f '{{join .RepoDigests ","}}')
-                 """
+                 //sh """
+                 sh "IMAGE_DIGEST=$(docker image inspect ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG} -f '{{join .RepoDigests ","}}')"
+                 //"""
                }
              }
         }
