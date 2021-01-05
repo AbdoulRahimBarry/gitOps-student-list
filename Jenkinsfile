@@ -32,6 +32,7 @@ pipeline {
                withCredentials([string(credentialsId: 'argocd', variable: 'ARGOCD_AUTH_TOKEN')]) {
                  sh """
                  docker tag $HOSTNAME/$PROJECT_ID/$IMAGE_NAME $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG
+                 docker push $HOSTNAME/$PROJECT_ID/$IMAGE_NAME:$DOCKER_TAG
 
                  """
                }
