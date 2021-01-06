@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy E2E') {
              steps {
                  git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
-                 sh "PWD"
+                 sh "{PWD}"
                  
                  /* Cloning the project */
                  sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
