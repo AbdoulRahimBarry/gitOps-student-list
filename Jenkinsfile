@@ -22,10 +22,6 @@ pipeline {
                         
                         sh "docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
                         sh "docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
-                         
-                        /* Push the image to the google container Registry */
-                        //stage 'push image'
-                        //containerResistry.push('latest')
 
                      }
                  }
