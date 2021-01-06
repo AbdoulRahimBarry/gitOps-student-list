@@ -34,20 +34,11 @@ pipeline {
 
 
         stage('Deploy E2E') {
-          environment {
-            GIT_CREDS = credentials('git')
-          }
-          steps {
-            container('tools') {
-              sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/AbdoulRahimBarry/kustomaze-demo.git"
-              sh "git config --global user.email 'barry2abdulrahim@gmail.com'"
-    
-              dir("argocd-demo-deploy") {
-                sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
-                sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
-              }
-            }
-          }
+             steps {
+                 git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git' 
+                 sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
+                 sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
+             }
         }
         
 
