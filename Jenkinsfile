@@ -20,8 +20,8 @@ pipeline {
                     docker.withRegistry('https://eu.gcr.io','gcr:service_account_json_key') {
                         def containerResistry = docker.build("${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"," -f simple_api/Dockerfile .")
                         
-                        sh "docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
-                        sh "docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
+                        sh "docker tag ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME} ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"
+                        sh "docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"
 
                      }
                  }
@@ -37,7 +37,7 @@ pipeline {
                  /* Cloning the project */
                  //sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
                  
-                 sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
+                 sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.BUILD_ID}"
                  sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
              }
         }
