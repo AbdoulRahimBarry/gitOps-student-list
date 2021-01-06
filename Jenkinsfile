@@ -35,7 +35,7 @@ pipeline {
                  sh "pwd"
                  
                  /* Cloning the project */
-                 sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
+                 //sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
                  
                  //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.DOCKER_TAG}"
                  //sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
