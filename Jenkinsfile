@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment{
         /* Variable */
-        DOCKER_TAG = getDockerTag()
         PROJECT_ID = 'traefikproject'
         IMAGE_NAME = 'pozos-website' //CONTAINER
         HOSTNAME = 'eu.gcr.io'
@@ -38,17 +37,11 @@ pipeline {
                  //sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
                  
                  sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                 sh "git commit -am 'Publish new version' && git push"
-                 sh "git remote -v"
+                 sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
+
              }
         }
         
 
     }
-}
-
-/* Permet to tag image with the id commit, but don't user this code  */
-def getDockerTag(){
-    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
-    return tag
 }
