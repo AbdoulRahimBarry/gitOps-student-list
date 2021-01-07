@@ -36,7 +36,7 @@ pipeline {
                  //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                  //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
-                 dri("ec2"){
+                 dir("ec2"){
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh 'pwd'
                        sh 'git status'
