@@ -41,11 +41,11 @@ pipeline {
                      
                      /* Creaction d'un credential sur Jenkins de type Username and Password*/
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                       sh 'pwd'
-                       sh 'git remote -v && git status'
-                       sh 'git add kustomization.yaml && git status'
-                       sh 'git commit -m 'Publish new version''
-                       sh 'git push'
+                       sh "pwd"
+                       sh "git remote -v && git status"
+                       sh "git add kustomization.yaml && git status"
+                       sh "git commit -m 'Publish new version'"
+                       sh "git push"
                      }
                  }
 
