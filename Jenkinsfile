@@ -42,7 +42,10 @@ pipeline {
                  dir('e2e'){
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      sh "pwd"
-                     sh "git status && git add kustomization.yaml && git commit -m 'Publish new version' && git status && git remote -v && git push"
+                     //sh "git status && git add kustomization.yaml && git commit -m 'Publish new version' && git status && git remote -v && git push"
+                     sshagent (credentials: ['github-key']) {
+                       sh "git status"
+                     }
                  }
 
              }
