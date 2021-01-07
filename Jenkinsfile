@@ -36,11 +36,12 @@ pipeline {
                  /* Cloning the project */
                  //sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
                  
-                 sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
+                 //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                  //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
                  dir('e2e'){
-                     
+                     sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      sh "pwd"
+                     sh "git status"
                  }
 
              }
