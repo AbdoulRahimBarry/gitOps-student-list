@@ -29,8 +29,9 @@ pipeline {
         stage('Deploy E2E') {
              steps {
                  /*pull the repo*/
-                 git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
+                 //git credentialsId: 'git_credential', url: 'git@github.com:AbdoulRahimBarry/gitOps-student-list.git'
                  //git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
+                 git credentialsId: 'github-key', url: 'git@github.com:AbdoulRahimBarry/kustomaze-demo.git'
 
                  
                  //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
