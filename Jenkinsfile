@@ -50,7 +50,7 @@ pipeline {
                      }*/
                      git url: "ssh://git@github.com:AbdoulRahimBarry/kustomaze-demo.git", credentialsId: 'github-key',branch: master
                      sh 'git commit -am "Merged develop branch to master'
-                     sh "git push origin master
+                     sh "git push origin master"
                  }
 
              }
