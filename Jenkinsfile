@@ -46,7 +46,6 @@ pipeline {
                        sh "git add kustomization.yaml"
                        sh "git commit -m 'Publish new version' && git status"
                        //sh "git push"
-                       sh 'git remote add origin https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
                        sh 'git push --set-upstream origin master'
                      }
                  }
