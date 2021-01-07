@@ -40,7 +40,8 @@ pipeline {
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      
                      /* Creaction d'un credential sur Jenkins de type Username and Password*/
-                     withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                     sshagent(['github-key']){
+                     //withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh "pwd"
                        sh "git remote -v && git status"
                        sh "git add kustomization.yaml"
