@@ -28,6 +28,7 @@ pipeline {
 
         stage('Deploy E2E') {
              steps {
+                 /*pull the repo*/
                  git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
                  //git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
 
@@ -37,6 +38,7 @@ pipeline {
 
                  dir("e2e"){
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
+                     
                      /* Creaction d'un credential sur Jenkins de type Username and Password*/
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh 'pwd'
