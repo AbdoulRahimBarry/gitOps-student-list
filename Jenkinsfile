@@ -46,7 +46,7 @@ pipeline {
                      sshagent (credentials: ['github-key']) {
                        sh "git status"
                        sh "pwd"
-                       sh "git ls-remote -h --refs git@github.com:AbdoulRahimBarry/kustomaze-demo.git master | awk "{print $1}""
+                       sh 'git ls-remote -h --refs git@github.com:AbdoulRahimBarry/kustomaze-demo.git master | awk "{print $1}"'
                        sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
                        
                      }
