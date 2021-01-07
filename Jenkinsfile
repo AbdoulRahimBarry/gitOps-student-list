@@ -30,6 +30,7 @@ pipeline {
 
         stage('Deploy E2E') {
              steps {
+                 git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
                  sshagent (credentials: ['github-key']) {
                    dir('e2e'){
                      sh "pwd"
