@@ -30,21 +30,14 @@ pipeline {
 
         stage('Deploy E2E') {
              steps {
-                 //git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
-                 git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
-                 sh "pwd"
-                 
-                 /* Cloning the project */
-                 //sh "git clone https://github.com/AbdoulRahimBarry/kustomaze-demo.git "
-                 
-                 //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                 //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
-                 dir('e2e'){
+                 sshagent (credentials: ['github-key']) {
+                   dir('e2e'){
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      sh "pwd"
                      sh "git status && git add kustomization.yaml && git commit -m 'Publish new version' && git status && git remote -v && git push"
-                 }
 
+                   } 
+                 }
              }
         }
         
