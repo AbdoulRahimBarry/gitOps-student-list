@@ -41,7 +41,7 @@ pipeline {
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh 'pwd'
                        sh 'git status && git remote -v'
-                       sh 'git push origin origin master}'
+                       sh 'git push origin origin master'
                      }
                  }
 
