@@ -37,7 +37,7 @@ pipeline {
                  //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
                  dir("ec2"){
-                     sh 'git tag -m "" ${VERSION_NUMBER}'
+                     sh 'git tag -m "hhhh" ${VERSION_NUMBER}'
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh 'pwd'
                        sh 'git status'
