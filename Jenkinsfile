@@ -28,13 +28,17 @@ pipeline {
 
         stage('Deploy E2E') {
              steps {
-                 //git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
-                 git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
+                 git credentialsId: 'git_credential', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo.git'
+                 //git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
                  sh "pwd"
 
                  
                  sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                  //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
+
+                 withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'passwrd', usernameVariable: 'login')]) {
+                   sh 'git push origin master'
+                 }
 
              }
         }
