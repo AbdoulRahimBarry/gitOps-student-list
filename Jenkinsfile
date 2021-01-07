@@ -48,7 +48,7 @@ pipeline {
                        sh "git push"
                        //sh 'git push --set-upstream origin master'
                      }
-
+                 }
              }
         }
         
