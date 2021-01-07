@@ -35,7 +35,7 @@ pipeline {
                  //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                  //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
-                 dir("ec2"){
+                 dir("e2e"){
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      /* Creaction d'un credential sur Jenkins de type Username and Password*/
                      withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
