@@ -33,14 +33,8 @@ pipeline {
                  sh "pwd"
 
                  
-                 //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                 //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
-                 dir('e2e'){
-                     sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                     sh "pwd"
-                     //sh "git status && git add kustomization.yaml && git commit -m 'Publish new version' && git status && git remote -v && git push"
-                       
-                 }
+                 sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
+                 sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
              }
         }
