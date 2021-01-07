@@ -34,7 +34,7 @@ pipeline {
 
                  
                  sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                 sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
+                 //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
              }
         }
