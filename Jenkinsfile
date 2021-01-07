@@ -40,18 +40,14 @@ pipeline {
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      
                      /* Creaction d'un credential sur Jenkins de type Username and Password*/
-                     /*withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                     withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh "pwd"
                        sh "git remote -v && git status"
                        sh "git add kustomization.yaml"
                        sh "git commit -m 'Publish new version' && git status"
-                       //sh "git push"
-                       sh 'git push --set-upstream origin master'
-                     }*/
-                     git url: "ssh://git@github.com:AbdoulRahimBarry/kustomaze-demo.git", credentialsId: 'github-key',branch: master
-                     sh 'git commit -am "Merged develop branch to master'
-                     sh "git push origin master"
-                 }
+                       sh "git push"
+                       //sh 'git push --set-upstream origin master'
+                     }
 
              }
         }
