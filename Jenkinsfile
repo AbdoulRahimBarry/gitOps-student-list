@@ -2,20 +2,18 @@ pipeline {
     agent any
     environment{
         /* Variable */
-        PROJECT_ID = 'traefikproject'
-        IMAGE_NAME = 'pozos-website'
-        HOSTNAME = 'eu.gcr.io'
-
-        ARGOCD_SERVER='35.188.203.1'
-        APP_NAME="debian-test-k8s"
+        PROJECT_ID = 'traefikproject'   /* Identifiand Project Google Cloud Platform*/
+        IMAGE_NAME = 'pozos-website'    /*Image Name*/
+        HOSTNAME = 'eu.gcr.io'          /*Host Name*/
 
     }
     
     stages{
-        stage('Build Docker Image'){
+        stage('Build and Push Docker Image'){
              steps {
                  script {
                     /* Build the image to the google container Registry form */
+                    /*Login to the Google Container resistry, [service_account_json_key: key creact to the Jenkins credential]*/
                     docker.withRegistry('https://eu.gcr.io','gcr:service_account_json_key') {
                         def containerResistry = docker.build("${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"," -f simple_api/Dockerfile .")
                         
@@ -26,23 +24,18 @@ pipeline {
              }
         }
 
-        stage('Deploy E2E') {
+        stage('Deploy in Staging E2E') {
              steps {
-                 /*pull the repo*/
-                 //git credentialsId: 'git_credential', url: 'git@github.com:AbdoulRahimBarry/gitOps-student-list.git'
-                 //git credentialsId: 'git', url: 'https://github.com/AbdoulRahimBarry/kustomaze-demo'
+                 /*pull the repository in Github using SSH, [github-key: Private key creact to Jenkins credential]*/
                  git credentialsId: 'github-key', url: 'git@github.com:AbdoulRahimBarry/kustomaze-demo.git'
 
-                 
-                 //sh "cd ./e2e && kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                 //sh "git commit -am 'Publish new version' && git push --set-upstream origin master || echo 'no changes'"
 
                  dir("e2e"){
+                     /*Use the kustomaze to change image tag*/
                      sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
                      
-                     /* Creaction d'un credential sur Jenkins de type Username and Password*/
+                     /*Use the sshagent to push the manifest in Github*/
                      sshagent(['github-key']){
-                     //withCredentials([usernamePassword(credentialsId: 'git_credential', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                        sh "pwd"
                        sh "git remote -v && git status"
                        sh "git add kustomization.yaml"
