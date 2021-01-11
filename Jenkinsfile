@@ -23,28 +23,6 @@ pipeline {
                  }
              }
         }
-
-        stage('Deploy in Staging E2E') {
-             steps {
-                 /*pull the repository in Github using SSH, [github-key: Private key creact to Jenkins credential]*/
-                 git credentialsId: 'github-key', url: 'git@github.com:AbdoulRahimBarry/kustomaze-demo.git'
-
-
-                 dir("e2e"){
-                     /*Use the kustomaze to change image tag*/
-                     sh "kustomize edit set image ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
-                     
-                     /*Use the sshagent to push the manifest in Github*/
-                     sshagent(['github-key']){
-                       sh "pwd"
-                       sh "git remote -v && git status"
-                       sh "git add kustomization.yaml"
-                       sh "git commit -m 'Publish new version'"
-                       sh 'git push -u origin master'
-                     }
-                 }
-             }
-        }
         
 
     }
