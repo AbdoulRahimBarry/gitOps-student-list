@@ -3,7 +3,7 @@ pipeline {
     environment{
         /* Variable */
         PROJECT_ID = 'infrastructure-176114'   /* Identifiand Project Google Cloud Platform*/
-        IMAGE_NAME = 'voyancegratuite'    /*Image Name*/
+        IMAGE_NAME = 'pezos-webside'    /*Image Name*/
         HOSTNAME = 'eu.gcr.io'          /*Host Name*/
 
     }
