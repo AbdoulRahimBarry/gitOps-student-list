@@ -41,7 +41,6 @@ pipeline {
                        sh "git remote -v && git status"
                        //sh "git add kustomization.yaml"
                        sh "git commit -am 'Publish new version'"
-                       sh "git pull"
                        sh 'git push -u origin master'
                      }
                  }
