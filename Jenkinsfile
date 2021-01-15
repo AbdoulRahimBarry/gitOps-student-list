@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment{
         /* Variable */
-        PROJECT_ID = 'infrastructure-176114'   /* Identifiand Project Google Cloud Platform*/
+        PROJECT_ID = 'traefikproject'   /* Identifiand Project Google Cloud Platform*/
         IMAGE_NAME = 'pezos-webside'    /*Image Name*/
         HOSTNAME = 'eu.gcr.io'          /*Host Name*/
 
