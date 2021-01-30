@@ -19,6 +19,7 @@ pipeline {
                         def containerResistry = docker.build("${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"," -f simple_api/Dockerfile .")
                         
                         sh "docker push ${env.HOSTNAME}/${env.PROJECT_ID}/${env.IMAGE_NAME}:${env.GIT_COMMIT}"
+                        sh "argocd --grpc-web app sync test --server argocd.demo.telemaque.fr --auth-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxMjMiLCJpYXQiOjE2MTIwMjM5NDUsImlzcyI6ImFyZ29jZCIsIm5iZiI6MTYxMjAyMzk0NSwic3ViIjoicHJvajpkZWZhdWx0OmRlcGxveS1yb2xlIn0.f2D6AbhNjbzy2MoZvX8DIuQavKfUDuZg2dMjH2eyplM"
 
                      }
                  }
